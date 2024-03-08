@@ -1,0 +1,17 @@
+{% extends "layouts/base.njk" %}
+
+{% block heading %}
+    
+{% endblock %}
+
+{% block contentBase %}
+    <div class="flex flex-col justify-between min-h-screen">
+        <div>
+            {% NavbarTop %}
+            <div class="p-5">
+                {{ content | safe }}
+            </div>
+        </div>
+        {% Footer %}
+    </div>
+{% endblock %}
