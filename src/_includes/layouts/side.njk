@@ -5,5 +5,13 @@
 {% endblock %}
 
 {% block contentBase %}
-    {{ content | safe }}
+    <div class="grid h-screen grid-flow-row grid-rows-1 grid-col-2-sidebar h-sideBarMin">
+        {% NavbarSide %}
+        <div class="flex flex-col justify-between min-h-full">
+            <div class="p-5">
+                {{ content | safe }}
+            </div>
+            {% Footer %}
+        </div>
+    </div>
 {% endblock %}
