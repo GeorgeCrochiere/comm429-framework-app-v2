@@ -1,0 +1,21 @@
+{% extends "layouts/base.njk" %}
+
+{% block heading %}
+    <link type="text/css" rel="stylesheet" href="/src/css/blog.css"/>
+{% endblock %}
+
+{% block contentBase %}
+    <div class="flex flex-col justify-between min-h-screen">
+        <div>
+            <div class="flex flex-row bg-success">
+                <ul class="menu">
+                    <li class="text-lg text-neutral"><a href="/blog"><strong><span class="material-symbols-outlined align-bottom">arrow_back</span> Back</strong></a></li>
+                </ul>
+            </div>
+            <div class="p-5 max-w-screen-lg mx-auto blog-post">
+                {{ content | safe }}
+            </div>
+        </div>
+        {% Footer %}
+    </div>
+{% endblock %}

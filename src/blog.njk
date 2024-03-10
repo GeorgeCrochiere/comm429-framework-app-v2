@@ -1,0 +1,14 @@
+---
+layout: layouts/side.njk
+title: Dev Blogs
+description: See all dev blogs for COMM 429!
+eleventyImport:
+  collections: ["posts"]
+---
+
+<h1>{{title}}</h1>
+<ul>
+  {% for post in collections.posts %}
+      <li><a href="{{post.url}}">Post: {{post.data.title}}</a></li>
+  {% endfor %}
+</ul>

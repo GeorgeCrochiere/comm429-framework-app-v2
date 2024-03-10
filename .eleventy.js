@@ -14,6 +14,10 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addShortcode("NavbarSide", NavbarSide);
     eleventyConfig.addShortcode("Footer", Footer);
 
+    eleventyConfig.addCollection("posts", function (collectionApi) {
+        return collectionApi.getFilteredByGlob("./src/blog/**/*.md");
+    });
+
     return {
         dir: {
             input: 'src',
