@@ -6,6 +6,7 @@ date: 2024-03-09
 author: George D. Crochiere
 categories:
     - Eleventy
+    - WebDev
 ---
 
 # Blog 2

@@ -6,6 +6,7 @@ date: 2024-02-13
 author: George D. Crochiere
 categories:
     - Shell
+    - WebDev
 ---
 
 # Web Development Starter Script

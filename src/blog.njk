@@ -6,9 +6,11 @@ eleventyImport:
   collections: ["posts"]
 ---
 
-<h1>{{title}}</h1>
-<ul>
+<h1 class="text-3xl">{{title}}</h1>
+
+<div class="grid-blog-posts">
   {% for post in collections.posts %}
-      <li><a href="{{post.url}}">Post: {{post.data.title}}</a></li>
+      {% BlogCard title=post.data.title, description=post.data.description, date=post.data.date, author=post.data.author, categories=post.data.categories, link=post.url%}
   {% endfor %}
-</ul>
+</div>
+

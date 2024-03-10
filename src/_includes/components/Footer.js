@@ -1,6 +1,6 @@
 const { html } = require('common-tags')
 
-function Footer({ sidebar }) {
+function Footer({ }) {
     return html`
     <footer class="footer p-10 bg-neutral text-neutral-content">
         <nav>

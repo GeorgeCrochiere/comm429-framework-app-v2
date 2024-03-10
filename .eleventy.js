@@ -1,6 +1,7 @@
 const NavbarTop = require("./src/_includes/components/NavbarTop.js");
 const NavbarSide = require("./src/_includes/components/NavbarSide.js");
 const Footer = require("./src/_includes/components/Footer.js");
+const BlogCard = require("./src/_includes/components/BlogCard.js");
 
 module.exports = function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy({ "./src/_includes/assets/": "./src/assets" });
@@ -13,6 +14,7 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addShortcode("NavbarTop", NavbarTop);
     eleventyConfig.addShortcode("NavbarSide", NavbarSide);
     eleventyConfig.addShortcode("Footer", Footer);
+    eleventyConfig.addShortcode("BlogCard", BlogCard);
 
     eleventyConfig.addCollection("posts", function (collectionApi) {
         return collectionApi.getFilteredByGlob("./src/blog/**/*.md");

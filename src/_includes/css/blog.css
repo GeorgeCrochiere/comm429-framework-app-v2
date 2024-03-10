@@ -9,6 +9,7 @@
     --alert: #d0000e;
     --info: #4ea7ff;
     --success: #00cfa8;
+    --visited: #146e5e;
 }
 
 html {
@@ -64,6 +65,10 @@ ol {
 div.blog-post a {
     color: var(--success);
     text-decoration: underline;
+}
+
+div.blog-post a:visited {
+    color: var(--visited);
 }
 
 blockquote {
