@@ -1847,10 +1847,6 @@ html:has(.drawer-toggle:checked) {
   height: 100%;
 }
 
-.h-12 {
-  height: 3rem;
-}
-
 .min-h-full {
   min-height: 100%;
 }
@@ -1863,8 +1859,8 @@ html:has(.drawer-toggle:checked) {
   width: 1.5rem;
 }
 
-.w-96 {
-  width: 24rem;
+.w-64 {
+  width: 16rem;
 }
 
 .w-full {
@@ -1876,20 +1872,8 @@ html:has(.drawer-toggle:checked) {
   width: max-content;
 }
 
-.w-72 {
-  width: 18rem;
-}
-
-.w-64 {
-  width: 16rem;
-}
-
 .max-w-screen-lg {
   max-width: 1024px;
-}
-
-.max-w-96 {
-  max-width: 24rem;
 }
 
 .flex-1 {
@@ -1914,6 +1898,10 @@ html:has(.drawer-toggle:checked) {
 
 .flex-col {
   flex-direction: column;
+}
+
+.justify-center {
+  justify-content: center;
 }
 
 .justify-between {
@@ -2001,19 +1989,14 @@ html:has(.drawer-toggle:checked) {
   vertical-align: bottom;
 }
 
-.text-lg {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-}
-
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
-
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 
 .font-bold {
@@ -2064,7 +2047,6 @@ html:has(.drawer-toggle:checked) {
 }
 
 .grid-blog-posts {
-  display: grid;
   grid-template-columns: repeat(auto-fill, 26rem);
   justify-content: center;
 }
@@ -2075,8 +2057,25 @@ html:has(.drawer-toggle:checked) {
 }
 
 @media (min-width: 640px) {
+  .sm\:mx-0 {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  .sm\:grid {
+    display: grid;
+  }
+
   .sm\:w-96 {
     width: 24rem;
+  }
+
+  .sm\:w-auto {
+    width: auto;
+  }
+
+  .sm\:flex-row {
+    flex-direction: row;
   }
 }
 
@@ -2087,17 +2086,5 @@ html:has(.drawer-toggle:checked) {
 
   .md\:hidden {
     display: none;
-  }
-
-  .md\:h-5 {
-    height: 1.25rem;
-  }
-
-  .md\:w-96 {
-    width: 24rem;
-  }
-
-  .md\:flex-row {
-    flex-direction: row;
   }
 }

@@ -3,7 +3,7 @@ const { html } = require('common-tags')
 function NavbarTop({ }) {
     title = "George D. Crochiere Dev Page"
     navbarText = ["Developer's Blog", "Workout App"]
-    navbarLinks = ["/blog", "/app"]
+    navbarLinks = ["/blog", "/workout-app"]
     navListItems = ``;
 
     for (let i = 0; i < navbarText.length; i++) {

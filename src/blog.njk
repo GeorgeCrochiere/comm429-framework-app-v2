@@ -7,8 +7,9 @@ eleventyImport:
 ---
 
 <h1 class="text-3xl">{{title}}</h1>
+<h2 class="text-lg">{{description}}</h2>
 
-<div class="grid-blog-posts">
+<div class="justify-center mx-auto w-max sm:w-auto sm:mx-0 sm:grid grid-blog-posts">
   {% for post in collections.posts %}
       {% BlogCard title=post.data.title, description=post.data.description, date=post.data.date, author=post.data.author, categories=post.data.categories, link=post.url%}
   {% endfor %}

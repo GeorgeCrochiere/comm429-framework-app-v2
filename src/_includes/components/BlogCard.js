@@ -12,14 +12,14 @@ function BlogCard({ title, date, description, author, categories, link }) {
     }
 
     return html`
-    <div class="card w-64 md:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+    <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
         <a href="${link}">    
             <div class="card-body">
                 <h2 class="card-title">
                     ${title}
                 </h2>
                 <p>${description}</p>
-                <div class="flex flex-col md:flex-row justify-between pt-4">
+                <div class="flex flex-col sm:flex-row justify-between pt-4">
                     <div class="badge badge-success mb-1">${dateData.toDateString()}</div>
                     <div class="badge badge-accent">${author}</div>
                 </div>
