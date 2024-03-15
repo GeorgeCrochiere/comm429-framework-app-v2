@@ -15,26 +15,20 @@
 </head>
 <body>
     
-    <div class="flex flex-col justify-between min-h-screen">
-        <div>
-            <div class="drawer">
-    <input id="my-drawer-3" type="checkbox" class="drawer-toggle" /> 
+    <div class="grid grid-flow-row grid-rows-1 grid-col-2-sidebar">
+        <div class="drawer md:hidden">
+    <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
     <div class="drawer-content flex flex-col">
 
         <!-- Navbar -->
-        <div class="w-full navbar bg-primary"> 
-        <div class="flex-1 px-2 mx-2 font-bold"><ul class="menu p-1 text-lg"><li><a href="/">George D. Crochiere Dev Page</a></li></ul></div>
-        <div class="flex-none md:hidden">
-            <label for="my-drawer-3" aria-label="open sidebar" class="btn btn-square btn-ghost">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-            </label>
-        </div>
-        <div class="flex-none hidden md:block">
-            <ul class="menu menu-horizontal">
-            <!-- Navbar menu content here -->
-            <li><a href="/blog">Developer's Blog</a></li>
-            <li><a href="/workout-app">Workout App</a></li>
-            
+        <div class="flex flex-col w-full h-full navbar bg-primary">
+        <div class="md:hidden">
+            <ul class="menu">
+                <li>
+                    <label for="my-drawer-3" aria-label="open sidebar" class="btn btn-square btn-ghost">
+                        <span class="material-symbols-outlined">subject</span>
+                    </label>
+                </li>
             </ul>
         </div>
         </div>
@@ -43,7 +37,7 @@
         <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay"></label> 
         <ul class="menu p-4 w-max min-h-full bg-base-200">
         <!-- Sidebar content here -->
-        <li><a href="/"><strong>George D. Crochiere Dev Page</strong></a></li>
+        <li><a href="/"><strong>George D. Crochiere</strong></a></li>
         <li></li>
         <li><a href="/blog">Developer's Blog</a></li>
         <li><a href="/workout-app">Workout App</a></li>
@@ -51,18 +45,845 @@
         </ul>
     </div>
     </div>
-            <div class="p-5">
-                
-<h1>Workout App</h1>
 
+<div class="w-max bg-primary hidden md:block">
+    <ul class="menu">
+        <li class="text-lg"><a href="/"><strong>George D. Crochiere</strong></a></li>
+        <li></li>
+        <li><a href="/blog">Developer's Blog</a></li>
+        <li><a href="/workout-app">Workout App</a></li>
+        
+    </ul>
+</div>
+        <div class="min-h-full">
+            <div class="min-h-screen flex flex-col justify-between">
+                <div class="p-5">
+                    
+<h1 class="text-3xl">Workout App</h1>
+<h2 class="text-lg">See various exercises on this page, shown here to show the use of API calls on an exercise API.</h2>
 
+<form class="p-5" onsubmit='runSearch("muscleGroup", "equipment")'>
+    <div class="flex flex-col sm:flex-row">
+        <select class="select select-accent w-full max-w-xs" id=muscleGroup>
+    <option selected value=-1>Filter by Muscle Group</option>
+    <option value="2">Shoulders</option>
+    <option value="1">Biceps</option>
+    <option value="11">Hamstrings</option>
+    <option value="13">Brachialis</option>
+    <option value="7">Calves</option>
+    <option value="8">Glutes</option>
+    <option value="12">Lats</option>
+    <option value="14">Obliquus externus abdominis</option>
+    <option value="4">Chest</option>
+    <option value="10">Quads</option>
+    <option value="6">Abs</option>
+    <option value="3">Serratus anterior</option>
+    <option value="15">Soleus</option>
+    <option value="9">Trapezius</option>
+    <option value="5">Triceps</option>
+    
+</select>
+        <select class="select select-accent w-full max-w-xs" id=equipment>
+    <option selected value=-1>Filter by Equipment</option>
+    <option value="1">Barbell</option>
+    <option value="8">Bench</option>
+    <option value="3">Dumbbell</option>
+    <option value="4">Gym mat</option>
+    <option value="9">Incline bench</option>
+    <option value="10">Kettlebell</option>
+    <option value="6">Pull-up bar</option>
+    <option value="2">SZ-Bar</option>
+    <option value="5">Swiss Ball</option>
+    <option value="7">none (bodyweight exercise)</option>
+    
+</select>
+    </div>
+    <button class="mt-5 btn btn-primary" type="submit" id="search">Search</button>
+</form>
+
+<div class="justify-center w-64 mx-auto sm:w-auto sm:mx-0 sm:grid grid-blog-posts" id="dataList">
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-88">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Bench Press Narrow Grip
+                </h2>
             </div>
-        </div>
-        <footer class="footer p-10 bg-neutral text-neutral-content">
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-97">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Benchpress Dumbbells
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-109">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Bent Over Rowing
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-1045">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Bent Over Rowing Reverse
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-110">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Bent Over Rowing Reverse
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-129">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Biceps Curl With Cable
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-74">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Biceps Curls With Barbell
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-81">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Biceps Curls With Dumbbell
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-80">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Biceps Curls With SZ-bar
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-98">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Butterfly
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-99">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Butterfly Narrow Grip
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-124">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Butterfly Reverse
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-207">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Cable Cross-over
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-104">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Calf Raises on Hackenschmitt Machine
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-1064">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Chest Press
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-91">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Crunches
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-92">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Crunches With Cable
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-94">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Crunches on Machine
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-1052">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Crunches on incline bench
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-105">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Deadlifts
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-100">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Decline Bench Press Barbell
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-101">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Decline Bench Press Dumbbell
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-83">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Dips Between Two Benches
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-112">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Dumbbell Lunges Standing
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-113">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Dumbbell Lunges Walking
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-87">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Dumbbells on Scott Machine
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-122">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Fly With Cable
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-145">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Fly With Dumbbells
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-146">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Fly With Dumbbells, Decline Bench
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-1058">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Front Pull narrow
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-1059">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Front pull wide
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-116">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Good Mornings
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-86">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Hammercurls
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-138">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Hammercurls on Cable
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-128">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Hyperextensions
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-163">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Incline Bench Press - Barbell
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-210">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Incline Bench Press - Dumbbell
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-1049">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Incline Bench Press - MP
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-148">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Lateral Raises
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-149">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Lateral Rows on Cable, One Armed
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-154">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Leg Curls (laying)
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-117">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Leg Curls (sitting)
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-118">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Leg Curls (standing)
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-130">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Leg Press on Hackenschmidt Machine
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-115">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Leg Presses (narrow)
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-114">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Leg Presses (wide)
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-125">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Leg Raises, Lying
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-126">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Leg Raises, Standing
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-143">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Long-Pulley (low Row)
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-144">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Long-Pulley, Narrow
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-93">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Negative Crunches
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-189">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Power Clean
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-140">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Pull Ups on Machine
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-107">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Pull-ups
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-142">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Rowing, Lying on Bench
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-108">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Rowing, Seated
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-106">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Rowing, T-bar
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-119">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Shoulder Press, Barbell
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-123">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Shoulder Press, Dumbbells
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-152">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Shoulder Press, on Machine
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-155">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Shoulder Press, on Multi Press
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-1060">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Shrugs on Multipress
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-150">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Shrugs, Barbells
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-151">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Shrugs, Dumbbells
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-1057">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Single Leg Extension
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-95">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Sit-ups
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-103">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Sitting Calf Raises
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-85">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Skullcrusher Dumbbells
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-84">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Skullcrusher SZ-bar
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-111">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Squats
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-1054">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Squats on Multipress
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-102">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Standing Calf Raises
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-89">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Triceps Extensions on Cable
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-90">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Triceps Extensions on Cable With Bar
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-139">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Triceps Machine
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-127">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Upright Row, SZ-bar
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+        <div class="card w-64 sm:w-96 bg-base-100 shadow-2xl border-solid border-neutral border-2 m-4 hover:border-accent transition-all ease-in-out">
+        <a href="ex-base-147">
+            <div class="card-body">
+                <h2 class="card-title">
+                    Upright Row, on Multi Press
+                </h2>
+            </div>
+        </a>
+    </div>
+    
+</div>
+
+<script type="text/javascript" src="/src/js/search_data_reload.js"></script>
+                </div>
+                <footer class="footer p-10 bg-neutral text-neutral-content">
     <nav>
         <h6 class="footer-title text-accent">&copy; 2024. George D. Crochiere</h6> 
     </nav>
 </footer>
+            </div>
+        </div>
     </div>
 
 </body>

@@ -15,6 +15,7 @@ module.exports = {
           "error": "#d0000e",
         },
       },
+      "nord"
     ],
   },
   content: ["./src/**/*.{html,njk,js}"],

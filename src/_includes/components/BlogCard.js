@@ -1,4 +1,4 @@
-const { html } = require('common-tags')
+const { html } = require('common-tags');
 
 function BlogCard({ title, date, description, author, categories, link }) {
     let dateData = new Date(date);
