@@ -9,10 +9,10 @@ description: "Detailed information on the specified exercise."
 permalink: "workout-app/{{ 'ex-base-' + id.id }}"
 ---
 
-<h1>{{title}}</h1>
-<h1>{{description}}</h1>
+{# <h1>{{title}}</h1>
+<h1>{{description}}</h1> #}
 
 {% ExerciseCardFull baseID=id.exercise_base, name=id.name, description=id.description, category=id.category, primary=id.muscles, secondary=id.muscles_secondary, equipment=id.equipment, baseDataMuscle=muscleGroup, baseDataEquipment=equipment %}
 
 
-<script type="text/javascript" src="/src/js/load_image.js"></script>
+<script type="text/javascript" src="../src/js/load_image.js"></script>

@@ -86,7 +86,7 @@ Follow the proceeding steps to install the script. These steps work for both the
 
 An example is shown below, where all projects are placed in the directory ```Projects```. A couple example projects are in this directory.
 
-![*An example directory showing the "Projects" folder with the "web_boiler.sh" script and various projects inside the directory.*](/src/assets/img/InstallationLocation.png)
+![*An example directory showing the "Projects" folder with the "web_boiler.sh" script and various projects inside the directory.*](../../src/assets/img/InstallationLocation.png)
 
 <p class="imgQuote">An example directory showing the "Projects" folder with the "web_boiler.sh" script and various projects inside the directory.</p>
 ___
@@ -144,7 +144,7 @@ To run the program on Windows:
 
 3. Upon creating a project, when VSCode opens, it will open in the WSL environment. You can either edit the project in the WSL environment, or click on the blue button in the bottom-right to open the project in your local installation of VSCode.
 
-    ![*How to redirect from WSL's VSCode to the local, Windows VSCode.*](/src/assets/img/ReopenInWindows.png)
+    ![*How to redirect from WSL's VSCode to the local, Windows VSCode.*](../../src/assets/img/ReopenInWindows.png)
 
     <p class="imgQuote">How to redirect from WSL's VSCode to the local, Windows VSCode.</p>
 
@@ -200,13 +200,13 @@ ___
 ## Results
 Regardless of the method on how you create your project, upon successful creation of a new web development project, the following page will be created and opened in your default browser.
 
-![*The index.html page in a browser, opened by the script.*](/src/assets/img/ResultPageTest.png)
+![*The index.html page in a browser, opened by the script.*](../../src/assets/img/ResultPageTest.png)
 
 <p class="imgQuote">The index.html page in a browser, opened by the script.</p>
 
 You will also have the following VSCode window open, showing the entire project and it's structure.
 
-![*VSCode open, showing the project structure.*](/src/assets/img/VSCodeOutput.png)
+![*VSCode open, showing the project structure.*](../../src/assets/img/VSCodeOutput.png)
 
 <p class="imgQuote">VSCode open, showing the project structure.</p>
 

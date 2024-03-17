@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="George D. Crochiere">
-<title>Blog 2</title>
+<title>Pagination in Static Site Development</title>
 
-<link type="text/css" rel="stylesheet" href="/src/css/global.css"/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
     
-    <link type="text/css" rel="stylesheet" href="/src/css/blog.css"/>
-    <script src="/src/js/syntaxHighlight.js" defer></script>
+    <link type="text/css" rel="stylesheet" href="../../src/css/global.css"/>
+    <link type="text/css" rel="stylesheet" href="../../src/css/blog.css"/>
+    <script src="../../src/js/syntaxHighlight.js" defer></script>
 
 </head>
 <body>
@@ -169,12 +169,12 @@ npm install -D
 <h3>Creating the Pagination</h3>
 <p>When getting started with pagination, we need to know what our dataset that we are working with contains. Pagination works by seperating a dataset by groupings of it's components of data, sorted by objects, akin to grouping a spreadsheet by every so-many rows. This involves looking at the data.</p>
 <p>To look at the data, we can either look at the data files, such as this project's JSON data, by viewing the data generated from a request by viewing the URL in a browser, or by dumping the data into Eleventy. In this case, the the raw JSON data is provided in the file <code>src/_data/paginationData.json</code> (randomly generated with <a href="https://generatedata.com/">generatedata.com</a>), and the data is dumped in <code>src/index.njx</code>, both of which are shown below.</p>
-<p><img src="/src/assets/img/paginationDataJSON.png" alt="Data from the paginationData.json file, generated with generatedata.com."></p>
+<p><img src="../../src/assets/img/paginationDataJSON.png" alt="Data from the paginationData.json file, generated with generatedata.com."></p>
 <p class="imgQuote">Data from the paginationData.json file, generated with <a href="https://generatedata.com/">generatedata.com</a>.<p/>
-<p><img src="/src/assets/img/paginationDataDUMP.png" alt="The data dump from the previously mentioned generated data."></p>
+<p><img src="../../src/assets/img/paginationDataDUMP.png" alt="The data dump from the previously mentioned generated data."></p>
 <p class="imgQuote">The data dump from the previously mentioned generated data.</p>
 <p>We are now going to create the layout of the pagination page. Let's assume you have a layout template that you want your paginated page to be based off it. In this case, we'll be using <code>home.njk</code>. Let's create a <code>contact_page.njk</code> file directly in the <code>src</code> directory.</p>
-<p><img src="/src/assets/img/createBasePage.png" alt="Adding the contact page file."></p>
+<p><img src="../../src/assets/img/createBasePage.png" alt="Adding the contact page file."></p>
 <p class="imgQuote">Adding the contact page file.</p>
 <p>Next, we're going to put the following Nunjucks data at the top of the new pagination file. This information relates to the base layout that the page will utilize, the general title and description information, and more information related to pagination.</p>
 <pre><code class="language-njk">---
@@ -225,13 +225,13 @@ pagination:
 <li>The specific components that are accessed with the dot <code>.</code> operator match up exactly with the name of each parameter in the object.</li>
 </ol>
 <p>This currently produces the following output with the URL <a href="http://localhost:8081/contact_page/">http://localhost:8081/contact_page/</a>:</p>
-<p><img src="/src/assets/img/ResultData1.png" alt="Results of the contact_page URL."></p>
+<p><img src="../../src/assets/img/ResultData1.png" alt="Results of the contact_page URL."></p>
 <p class="imgQuote">Results of the contact_page URL.</p>
 <p>Note how this differs when we go to the URL <a href="http://localhost:8081/contact_page/1">http://localhost:8081/contact_page/1</a>:</p>
-<p><img src="/src/assets/img/ResultData2.png" alt="Results of the contact_page URL, second page."></p>
+<p><img src="../../src/assets/img/ResultData2.png" alt="Results of the contact_page URL, second page."></p>
 <p class="imgQuote">Results of the contact_page URL, second page.</p>
 <p>We can moodify the values within the pagination model to alter how a single page is loaded. For example, say we modify <code>size</code> to have a different value, suce as <code>2</code>. This produces the following result on the URL <a href="http://localhost:8081/contact_page/">http://localhost:8081/contact_page/</a>:</p>
-<p><img src="/src/assets/img/ResultData3.png" alt="Results of the contact_page URL after changing the size."></p>
+<p><img src="../../src/assets/img/ResultData3.png" alt="Results of the contact_page URL after changing the size."></p>
 <p class="imgQuote">Results of the contact_page URL after changing the size.</p>
 <p>Note how this removes all results. We can get the results back by indexing on the list of objects that is now <code>contact</code>. Modify the file to read as follows:</p>
 <pre><code class="language-njk">---
@@ -253,7 +253,7 @@ pagination:
 &lt;p&gt;{/{contact[1].name}}&lt;/p&gt;
 </code></pre>
 <p>We now get results to show on the loaded page:</p>
-<p><img src="/src/assets/img/ResultData4.png" alt="Results of the contact_page URL after increasing size and fixing data indexing."></p>
+<p><img src="../../src/assets/img/ResultData4.png" alt="Results of the contact_page URL after increasing size and fixing data indexing."></p>
 <p class="imgQuote">Results of the contact_page URL after increasing size and fixing data indexing.</p>
 <hr>
 <p><a name="additional"></a></p>

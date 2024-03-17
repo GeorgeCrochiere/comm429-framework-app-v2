@@ -1,8 +1,8 @@
 ---
 layout: layouts/blog.njk
-title: Blog 2
-description: COMM 429 Blog Post for the development of a shell script.
-date: 2024-03-09
+title: Pagination in Static Site Development
+description: COMM 429 Blog Post for the the implementiation of pagination in Static Site development utilizing Eleventy
+date: 2024-03-15
 author: George D. Crochiere
 categories:
     - Eleventy
@@ -160,17 +160,17 @@ When getting started with pagination, we need to know what our dataset that we a
 
 To look at the data, we can either look at the data files, such as this project's JSON data, by viewing the data generated from a request by viewing the URL in a browser, or by dumping the data into Eleventy. In this case, the the raw JSON data is provided in the file ```src/_data/paginationData.json``` (randomly generated with [generatedata.com](https://generatedata.com/)), and the data is dumped in ```src/index.njx```, both of which are shown below.
 
-![Data from the paginationData.json file, generated with [generatedata.com](https://generatedata.com/).](/src/assets/img/paginationDataJSON.png)
+![Data from the paginationData.json file, generated with [generatedata.com](https://generatedata.com/).](../../src/assets/img/paginationDataJSON.png)
 
 <p class="imgQuote">Data from the paginationData.json file, generated with <a href="https://generatedata.com/">generatedata.com</a>.<p/>
 
-![The data dump from the previously mentioned generated data.](/src/assets/img/paginationDataDUMP.png)
+![The data dump from the previously mentioned generated data.](../../src/assets/img/paginationDataDUMP.png)
 
 <p class="imgQuote">The data dump from the previously mentioned generated data.</p>
 
 We are now going to create the layout of the pagination page. Let's assume you have a layout template that you want your paginated page to be based off it. In this case, we'll be using ```home.njk```. Let's create a ```contact_page.njk``` file directly in the ```src``` directory.
 
-![Adding the contact page file.](/src/assets/img/createBasePage.png)
+![Adding the contact page file.](../../src/assets/img/createBasePage.png)
 
 <p class="imgQuote">Adding the contact page file.</p>
 
@@ -230,19 +230,19 @@ There are a couple of components, most similar to Eleventy, that are essential t
 
 This currently produces the following output with the URL [http://localhost:8081/contact_page/](http://localhost:8081/contact_page/):
 
-![Results of the contact_page URL.](/src/assets/img/ResultData1.png)
+![Results of the contact_page URL.](../../src/assets/img/ResultData1.png)
 
 <p class="imgQuote">Results of the contact_page URL.</p>
 
 Note how this differs when we go to the URL [http://localhost:8081/contact_page/1](http://localhost:8081/contact_page/1):
 
-![Results of the contact_page URL, second page.](/src/assets/img/ResultData2.png)
+![Results of the contact_page URL, second page.](../../src/assets/img/ResultData2.png)
 
 <p class="imgQuote">Results of the contact_page URL, second page.</p>
 
 We can moodify the values within the pagination model to alter how a single page is loaded. For example, say we modify ```size``` to have a different value, suce as ```2```. This produces the following result on the URL [http://localhost:8081/contact_page/](http://localhost:8081/contact_page/):
 
-![Results of the contact_page URL after changing the size.](/src/assets/img/ResultData3.png)
+![Results of the contact_page URL after changing the size.](../../src/assets/img/ResultData3.png)
 
 <p class="imgQuote">Results of the contact_page URL after changing the size.</p>
 
@@ -270,7 +270,7 @@ pagination:
 
 We now get results to show on the loaded page:
 
-![Results of the contact_page URL after increasing size and fixing data indexing.](/src/assets/img/ResultData4.png)
+![Results of the contact_page URL after increasing size and fixing data indexing.](../../src/assets/img/ResultData4.png)
 
 <p class="imgQuote">Results of the contact_page URL after increasing size and fixing data indexing.</p>
 
