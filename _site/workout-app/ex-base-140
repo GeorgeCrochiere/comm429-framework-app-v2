@@ -10,6 +10,7 @@
 
     
     <link type="text/css" rel="stylesheet" href="../src/css/global.css"/>
+    <script src="../src/js/url_fix.js" defer></script>
 
 </head>
 <body>
