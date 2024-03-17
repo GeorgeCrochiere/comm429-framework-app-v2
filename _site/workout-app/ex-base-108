@@ -59,6 +59,9 @@
             <div class="min-h-screen flex flex-col justify-between">
                 <div class="p-5">
                     
+<h1>Exercise Data Page</h1>
+<h1>Detailed information on the specified exercise.</h1>
+
 <div class="card max-w-2xl mx-auto mt-4 bg-base-100 shadow-xl">
     <figure class="bg-white" id="imgEx"></figure>
     <div class="card-body">

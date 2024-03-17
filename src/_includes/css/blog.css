@@ -108,3 +108,15 @@ h1+p+p {
 h1+p+p {
     margin-bottom: 1rem;
 }
+
+img {
+    display: block;
+    margin: auto;
+}
+
+.imgQuote {
+    text-align: center;
+    font-style: italic;
+    margin: 0px;
+    margin-top: -1rem;
+}

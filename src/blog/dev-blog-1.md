@@ -88,6 +88,7 @@ An example is shown below, where all projects are placed in the directory ```Pro
 
 ![*An example directory showing the "Projects" folder with the "web_boiler.sh" script and various projects inside the directory.*](/src/assets/img/InstallationLocation.png)
 
+<p class="imgQuote">An example directory showing the "Projects" folder with the "web_boiler.sh" script and various projects inside the directory.</p>
 ___
 
 <a name="run"></a>
@@ -145,6 +146,8 @@ To run the program on Windows:
 
     ![*How to redirect from WSL's VSCode to the local, Windows VSCode.*](/src/assets/img/ReopenInWindows.png)
 
+    <p class="imgQuote">How to redirect from WSL's VSCode to the local, Windows VSCode.</p>
+
 <a name="run-linux"></a>
 
 ### Linux
@@ -199,9 +202,13 @@ Regardless of the method on how you create your project, upon successful creatio
 
 ![*The index.html page in a browser, opened by the script.*](/src/assets/img/ResultPageTest.png)
 
+<p class="imgQuote">The index.html page in a browser, opened by the script.</p>
+
 You will also have the following VSCode window open, showing the entire project and it's structure.
 
 ![*VSCode open, showing the project structure.*](/src/assets/img/VSCodeOutput.png)
+
+<p class="imgQuote">VSCode open, showing the project structure.</p>
 
 You can now start working on your project by editing the files within this directory. This can include adding content in the webpage, adding images, styles, and more! As shown in the above output, there is even a spot for your name on Line 6! You can see your results in the browser by refreshing the page that was opened, the ```index.html``` file.
 
