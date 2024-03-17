@@ -271,7 +271,7 @@ pagination:
     data: paginationData
     size: 1
     alias: contact
-permalink: contact/undefined
+permalink: contact/{/{contact.name | slugify}}
 ---
 </code></pre>
 <p>Now to get to our first page, we would have to enter the URL <a href="http://localhost:8081/contact/levi-forbes">http://localhost:8081/contact/levi-forbes</a>, which matches directly with the name of the first contact, &quot;Levi Forbes,&quot; according to the JSON data file. Though it should be noted that if the size is also altered, the <code>contact</code> would have to be indexed.</p>

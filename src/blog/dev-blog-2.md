@@ -298,7 +298,7 @@ pagination:
     data: paginationData
     size: 1
     alias: contact
-permalink: contact/{{contact.name | slugify}}
+permalink: contact/{/{contact.name | slugify}}
 ---
 ```
 
