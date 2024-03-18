@@ -31,7 +31,7 @@ function ExerciseCardFull({ baseID, name, description, category, primary, second
 
     return html`
     <div class="card max-w-2xl mx-auto mt-4 bg-base-100 shadow-xl">
-        <figure class="bg-white" id="imgEx"></figure>
+        <figure class="bg-white min-h-72" id="imgEx"></figure>
         <div class="card-body">
             <h2 class="card-title">${name}</h2>
             <h6 class="hidden" id="imageID">${baseID}</h6>
@@ -50,9 +50,8 @@ function ExerciseCardFull({ baseID, name, description, category, primary, second
                     <div class="flex flex-row justify-end">
                         ${equipmentTags}        
                     </div>
-                </div
+                </div>
             </div>
-        </div>
         </div>
     </div>`;
 }

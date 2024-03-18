@@ -2243,12 +2243,20 @@ html:has(.drawer-toggle:checked) {
   height: 100%;
 }
 
+.min-h-60 {
+  min-height: 15rem;
+}
+
 .min-h-full {
   min-height: 100%;
 }
 
 .min-h-screen {
   min-height: 100vh;
+}
+
+.min-h-72 {
+  min-height: 18rem;
 }
 
 .w-6 {
