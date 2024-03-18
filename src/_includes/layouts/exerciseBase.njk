@@ -1,0 +1,20 @@
+{% extends "layouts/base.njk" %}
+
+{% block heading %}
+    <link type="text/css" rel="stylesheet" href="../../src/css/global.css"/>
+    <script src="../../src/js/url_fix.js" defer></script>
+{% endblock %}
+
+{% block contentBase %}
+    <div class="grid grid-flow-row grid-rows-1 grid-col-2-sidebar">
+        {% NavbarSide %}
+        <div class="min-h-full">
+            <div class="flex flex-col justify-between min-h-screen">
+                <div class="p-5">
+                    {{ content | safe }}
+                </div>
+                {% Footer %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
