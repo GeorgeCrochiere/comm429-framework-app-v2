@@ -10,8 +10,6 @@ categories:
     - File Upload
 ---
 
-<script src="./src/js/syntaxHighlight.js" defer></script>
-
 # WordPress Installation - Photo Upload Fix
 George D. Crochiere
 
