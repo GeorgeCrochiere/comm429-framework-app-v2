@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="George D. Crochiere">
+<title>Fullstack Development - Client and Server Communication with Abstraction</title>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    
+    <link type="text/css" rel="stylesheet" href="../../src/css/global.css"/>
+    <link type="text/css" rel="stylesheet" href="../../src/css/blog.css"/>
+    <script src="../../src/js/syntaxHighlight.js" defer></script>
+    <script src="../../src/js/url_fix.js" defer></script>
+
+</head>
+<body>
+    
+    <div class="flex flex-col justify-between min-h-screen">
+        <div>
+            <div class="flex flex-row bg-success">
+                <ul class="menu">
+                    <li class="text-lg text-neutral"><a href="/blog"><strong><span class="align-bottom material-symbols-outlined">arrow_back</span> Back</strong></a></li>
+                </ul>
+            </div>
+            <div class="max-w-screen-lg p-5 mx-auto blog-post">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/dracula.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
+<h1>Fullstack Development - Client and Server Communication with Abstraction</h1>
+<p>George D. Crochiere</p>
+<p>COMM-429 Front End Development</p>
+<h2>Table of Contents</h2>
+<ul>
+<li><a href="#intro">Introduction</a></li>
+<li><a href="#example">The Example &amp; Stack</a>
+<ul>
+<li><a href="#example-prereq">Prerequisites</a></li>
+</ul>
+</li>
+<li><a href="#structure">Communication Structure</a>
+<ul>
+<li><a href="#structure-client">Client</a></li>
+<li><a href="#structure-server">Server</a></li>
+<li><a href="#structure-diagram">Diagram</a></li>
+</ul>
+</li>
+<li><a href="#implement">Implementation Overview</a></li>
+<li><a href="#conclude">Conclusion</a></li>
+</ul>
+<hr>
+<p><a name="intro"></a></p>
+<h2>Introduction</h2>
+<p>In the development of a larger web project, there is typically the need to update and recieve data between the website, and a database of some form. While it is possible to get data utilizing the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch">fetch</a> command with JavaScript and data APIs, the only way to alter data and store it permanently is with a database.</p>
+<p>With this is mind, in the development of a project I am working on at my university, the developement of the Honors Program website, I've needed to implement more methods to the program to access data from the associated database, needing to build off the pre-existing system. Given how the system has been abstracted to allow for more organized data structures, this article was designed to give an overview on how you can possible structure your client-server communication.</p>
+<hr>
+<p><a name="example"></a></p>
+<h2>The Example &amp; Stack</h2>
+<p>To recap, this project is a closed-source project that already exists, focused on tracking submitted data for my university's honors program, which include program requirements such as service hours. This project was made with the following stack:</p>
+<ul>
+<li><a href="https://nodejs.org/en">NodeJS</a></li>
+<li><a href="https://react.dev/">ReactJS</a>
+<ul>
+<li>HTML</li>
+<li>CSS</li>
+<li>JavaScript
+<ul>
+<li><a href="https://mui.com/material-ui/">Material MUI</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://expressjs.com/">ExpressJS</a>
+<ul>
+<li>JavaScript</li>
+</ul>
+</li>
+<li><a href="https://axios-http.com/docs/intro">Axios</a></li>
+<li><a href="https://www.mysql.com/">MySQL</a></li>
+</ul>
+<p>The project itself is primarly broken into three directoried:</p>
+<ul>
+<li><code>client</code> - Contains files relavent to maintaining the client side of the website</li>
+<li><code>server</code> - Contains files associated with the server and interactions with the MySQL database</li>
+<li><code>shared</code> - A directory associated with schematic files utilized by both the client and the server.</li>
+</ul>
+<hr>
+<p><a name="prereq"></a></p>
+<h3>Prerequisites</h3>
+<p>Note that for this project to work, you need to have a client-server based website that is based off of ReactJS and ExpressJS. <strong>This article will not cover how to start a project from scratch; it will assume you have some client and server at least functional.</strong></p>
+<p>For some examples on how to start a project between a ReactJS client and an ExpressJS server, you can refer to <a href="https://dev.to/techcheck/creating-a-react-node-and-express-app-1ieg">this DEV Community article</a> or  <a href="https://www.freecodecamp.org/news/create-a-react-frontend-a-node-express-backend-and-connect-them-together-c5798926047c/">this freeCodeCamp article</a> for some examples.</p>
+<p>To make it easier, you should also have some background with how general requests and responces work, as mentioned in the following secion on the structure of the program. This will make it easier to troubleshoot, as this post will not include all code to make the program run, just the code associated with requests and responces.</p>
+<hr>
+<p><a name="structure"></a></p>
+<h2>Communication Structure</h2>
+<p>When you are making your first ReactJS and ExpressJS project, you might have an example of creating requests and responses between the client and server. The freeCodeCamp tutorial above gives us a server that has a main router broken into the main server file and the router controller, and the client page file that utilizes fetch to get data.</p>
+<h5>server-app.js - freeCodeCamp.org</h5>
+<pre><code class="language-javascript">var testAPIRouter = require(&quot;./routes/testAPI&quot;);
+...
+app.use(&quot;/testAPI&quot;, testAPIRouter);
+...
+</code></pre>
+<h5>server-test-router.js - freeCodeCamp.org</h5>
+<pre><code class="language-javascript">var express = require(“express”);
+var router = express.Router();
+
+router.get(“/”, function(req, res, next) {
+    res.send(“API is working properly”);
+});
+
+module.exports = router;
+</code></pre>
+<h5>client-app.js - freeCodeCamp.org</h5>
+<pre><code class="language-javascript">...
+constructor(props) {
+    super(props);
+    this.state = { apiResponse: &quot;&quot; };
+}
+
+callAPI() {
+    fetch(&quot;http://localhost:9000/testAPI&quot;)
+        .then(res =&gt; res.text())
+        .then(res =&gt; this.setState({ apiResponse: res }));
+}
+
+componentWillMount() {
+    this.callAPI();
+}
+...
+&lt;p className=&quot;App-intro&quot;&gt;;{this.state.apiResponse}&lt;/p&gt;
+...
+</code></pre>
+<p>While this server setup is a starting point, we need to expand upon both setups to allow for more abstraction and better control of each operation.</p>
+<blockquote>
+<p>For more information on how requests (GET and POST) and responses work in web communication, you can refer to <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages">this article from the MDN Web Docs</a></p>
+</blockquote>
+<hr>
+<p><a name="structure-client"></a></p>
+<h3>Client</h3>
+<p>The client is the part of the whole projects that sets up the request in the first place, regardless of the type that is initialized. To allow for the website client to be able to control how its calls are made, a file can be made for each webpage that contains the different API functions. This is known as a controller. The controller doesn't push the entire function; it only takes the inputs that are passed into it from the webpage, and moves into the generalized website <code>apiAdapter</code>, which when given the list of files it can pull functions from, then sends the request message to the server.</p>
+<p><a name="structure-server"></a></p>
+<h3>Server</h3>
+<p>When a request is picked up by the server, the ExpressJS server gets the URL that is the request, as all requests and the data associated with them are identified by a unique URL, and uses the first argument to identify which router to utilize. This file also takes the input arguments and starts passing the data through the system into the next stages of the server. The router then identifies which code to run, with this code being the model that represents the data. It is in this model file that the data is actually processed and it interacts with the database.</p>
+<p>In general, as each of these functions are making a request to a function, followed by a form of response, this responce is then constantly passed back up through the chain, and forms a responce that is sent via a URL. This URL responce goes back to the client, where this process continues to return data to be added to the server.</p>
+<p><a name="structure-diagram"></a></p>
+<h3>Diagram</h3>
+<p>Below is a diagram that outlines the above process in a visual form:</p>
+<p><img src="../../src/assets/img/Diagram-COMM429-Final.png" alt="Diagram of Client and Server interactions."></p>
+<p class="imgQuote">Diagram of Client and Server interactions.</p>
+<p>The communication that occurs between the client and the server, at least in the form of this project, relies on a singular instance of the Axios API Adapter, though this can be replaced with the use of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch">fetch API</a>.</p>
+<hr>
+<p><a name="implement"></a></p>
+<h2>Implementation Overview</h2>
+<blockquote>
+<p><strong>THIS CODE IS NOT ACCURATE TO EVERY PROJECT!</strong> Given how this project is closed source, the code provided on this blog post has been altered. You will likely have to modify some code to work best with your database, the data you are passing from the client to the server, and more.</p>
+</blockquote>
+<p>To implement this entire process, we can start on the server-end, where similar to the freeCodeCamp.org example.</p>
+<blockquote>
+<p><strong>NOTE:</strong> This project does not show the exact folder pathing used in this project. Whatever file system you implement only modifies import-related statements.</p>
+</blockquote>
+<p>Let's start with the server. We're going to assume that the database is fully set up as well, as this setup is very much determined by what your website is for. The model is the section of code that, given input data from a request, actually runs the process in the database to obtain or modify the data stored.</p>
+<blockquote>
+<p>This model system utilizes a specific database helper and models to get information relating to the database. This is a connection that creates a single instance of the database utilizing the following node packages: <code>mysql2</code>, <code>express-session</code>, and <code>express-mysql-session</code>. The database is initialized to ensure that a single connection exists at one time to reduce resources used on the server.  Database initialization is done on server startup, and each request simply uses the call.</p>
+</blockquote>
+<h5>database_helper.js</h5>
+<pre><code class="language-js">...
+
+const initializeDatabase = (config, callback) =&gt; {
+  if (_connection) {
+    throw new Error('database is already initialized');
+  }
+
+  // initialize mysql connection
+  _connection = mysql.createPool(config);
+  // initialize session store
+  _sessionStore = new MySqlStoreClass({}, _connection);
+
+  console.log(
+    `database initialized -- connected to ${config.host}:${config.port}`,
+  );
+
+  return callback();
+};
+
+...
+
+const getConnectionPool = () =&gt; {
+  assert.ok(_connection, 'database has not been initialized');
+  return _connection;
+};
+</code></pre>
+<h5>test_model_function.js - Located in the directory 'src/models/testing'</h5>
+<pre><code class="language-js">const databaseHelper = require('database_helper');
+const {
+    PayloadModel,
+} = require('payload_model');
+...
+const someDatabaseModelFunction = async (data) =&gt; {
+    // Some processing here
+    const query = 'SELECT * FROM ... WHERE a = ? ...' // Enter your query
+    const params = [aParam];
+
+    const [data] = await databaseHelper.getConnectionPool().query(query, params);
+    return new PayloadModel(data); // PayloadModel is defined as a object able to hold data,
+                                    // stored in the variable &quot;data&quot;.
+}
+
+module.exports = someDatabaseModelFunction;
+</code></pre>
+<p>Once we have out model's function, we can now make this model accessible to the server's controller via a process of pathing the exports into a singular index.js file. For this example, we'll path this into a testing model group, with these model groups being pathed into an overall model pattern. This nesting process allows us to categorize model functions based on their overall functionality, and to further make them all accessible from a single import.</p>
+<h5>index.js - Located in the directory 'src/models/testing'</h5>
+<pre><code class="language-js">const someDatabaseModelFunction = require('./test_model_function.js');
+
+module.exports = {
+    someDatabaseModelFunction,
+}
+</code></pre>
+<h5>index.js - Located in the directory 'src/models'</h5>
+<pre><code class="language-js">const testingModel = require('./testing');
+
+module.exports = {
+    testingModel,
+}
+</code></pre>
+<p>This makes the <code>someDatabaseModelFunction</code> database accessor avaliable in the overall models import statement, but we need to now incorporate the controller for the server. This controller will need to call the model that was just made, but is the functionality that is called when the request is taken.</p>
+<hr>
+<p>With this all in mind, let's start by creating the specific controller for the previously created model.</p>
+<h5>someDatabaseModelFunction.controller.js - Located in the directory 'src/testing/controller'</h5>
+<pre><code class="language-js">const { testingModel } = require('../../models');
+...
+const someDatabaseModelFunction = async (request) =&gt; {
+    // Pull data from the request if needed, for example, session data from the header.
+    const data = // Some input data, from above statement
+    const model = await testingModel.someDatabaseModelFunction(data);
+
+    const responce = {
+        data: model.data,
+        header: {
+            // Add other header data, such as success variable, etc.
+            status: 0 // Success
+        },
+    };
+    return response;
+};
+
+module.exports = someDatabaseModelFunction;
+</code></pre>
+<p>We can now import this specific controller in the &quot;testing&quot; router into it's index file. This needs to be done by first getting all controllers into a single file for a list of all possible controllers, which can then be implemented into the router.</p>
+<h5>index.js - Located in the directory 'src/testing/controller' - Concatenates controllers</h5>
+<pre><code class="language-js">const someDatabaseModelFunction = require('./someDatabaseModelFunction.controller');
+
+module.exports = {
+    someDatabaseModelFunction,
+}
+</code></pre>
+<h5>index.js - The router for all 'testing' API server calls, located in the directory 'src/testing'</h5>
+<pre><code class="language-js">const express = require('express');
+const controller = require('./controller');
+const router = express.Router();
+
+// Now create the associated get/posts requests. 
+// For the purposes of this, our function will be a post request.
+// The data will be accessed at the URL (with port 3001):
+// localhost:3001/testing/testingPost
+router.post('/testingPost', async (req, res) =&gt; {
+    const request = {
+        header: // Create request data with data from req
+                // this 'req' variable is what is sent over the internet.
+    }
+    const response = await controller.someDatabaseModelFunction(request);
+    return res.send(response);
+});
+
+module.exports = router;
+</code></pre>
+<p>Finally, we can add our router to the <code>app.js</code> file that contains all the overall router connections.</p>
+<h5>app.js - The main function for the server, located in the directory 'src'</h5>
+<pre><code class="language-js">... // NOTE: you'll likely need more import statements, with this example showing the routing of models
+const express = require('express'); 
+const sessions = require('express-session');
+const bodyParser = require('body-parser');
+const testingRouter = require('./testing');
+...
+const server = express();
+...
+server.use(bodyParser.urlencoded({ extended: true }));
+server.use(bodyParser.json());
+...
+    // After Database initialization, in follow-up function
+    server.use('/testing', testingRouter);
+...
+</code></pre>
+<p>Assuming that all other, relavant, import statements are included, the ExpressJS server should now work, congrats! However, this leads us with the next major step of the project; the client...</p>
+<hr>
+<p>For the client, we're going to assume that you've created a project that incorporates a folder for the page you want to include the database query for. In this example, we'll use the page titled &quot;Test Page&quot;, which will be located in the folder 'src/test_page' in the client.</p>
+<blockquote>
+<p>To get us started, as a reminder, this verion of the project will be utilizing Axios, a NodeJS package designed to help with requests and responces between a client and a server, except it's a bit easier to add in parameters for the request. This will be referenced as the project continues.</p>
+</blockquote>
+<p>For this project, the Axios instance is located in the directory 'src/apiAdapter' within the client. This directory consists of a main <code>index.js</code> file, an <code>axios_instance.js</code> file, along with an adapter file for each specific page. These adapter files for the client are similar to the controller file on the server, where only one can exist for a page or set of pages, with the controller contributing to several requests; the main difference between each controller is the start of the request URL.</p>
+<h5>axios_instance.js - Located on the client at 'src/apiAdapter'</h5>
+<pre><code class="language-js">import axios from 'axios';
+
+const instance = axios.create({
+  baseURL: 'http://localhost:3001',
+  withCredentials: true, // Optional setting, based on how secure you want your request system. 
+                        // Possible to effect the server files.
+});
+
+export default instance;
+</code></pre>
+<h5>testing.adapter.js - Located on the client at 'src/apiAdapter'</h5>
+<pre><code class="language-js">import axiosInstance from 'api_adapter/axios_instance';
+
+export const someDatabaseModelFunction = async (request) =&gt; {
+    // Can add other functions to clean up between request input and response.
+    // Use the URL of the GET/POST request you are using on the server
+    const responce = await axiosInstance.post('/testing/testingPost', {request});
+    return response;
+}
+</code></pre>
+<h5>index.js - Located on the client at 'src/apiAdapter'</h5>
+<pre><code class="language-js">import * as testingAdapter from 'apiAdapter/testing.adapter';
+
+const apiAdapter = {
+    ...testingAdapter,
+};
+
+export default apiAdapter;
+</code></pre>
+<p>These componets of code will at least get our <code>apiAdapter</code> functional to use on the client. We can now create the controller for the site. We're going to create the following file in the 'src/test_page/controller' directory.</p>
+<blockquote>
+<p><strong>NOTE:</strong> This single controller file can contain several apiAdapter functions as well.</p>
+</blockquote>
+<h5>test_page.controller.js - Located on the client at 'src/test_page/controller'</h5>
+<pre><code class="language-js">import apiAdapter from &quot;apiAdapter&quot;;
+...
+const someDatabaseModelFunction = async (dataValue1, dataValue2, dataValue3) =&gt; {
+    const response = await apiAdapter.someDatabaseModelFunction({
+        // You can format your data however you best see fit
+        data: {
+            val1: dataValue1,
+            val2: dataValue2,
+            val3: dataValue3,
+        },
+    });
+    return response;
+}
+
+...
+
+const testPageController = {
+    someDatabaseModelFunction,
+    ...
+};
+
+export default testPageController;
+</code></pre>
+<p>We've just created our controller that we can now use to get data from the database into the server from the client! Now, let's go on the page itself, and do it!</p>
+<h5>index.jsx - Example page, located in client at 'src/test_page'</h5>
+<pre><code class="language-js">import React, {
+    ReactElement,
+    useEffect,
+    useState,
+    useRef,
+} from 'react';
+...
+import {testPageController} from './controller';
+...
+
+export default function TestPage() {
+    ...
+    // You can utilize the call in most places on the page, based on the prereqs.
+    const getData = async(v1, v2, v3) =&gt; {
+        const request = await testPageController.someDatabaseModelFunction(v1, v2, v3);
+        const dataResponse = request.data.data // Exact path will likely be different
+                                                // Implementation based
+        ...
+        // Do something with the data
+    }
+    ...
+}
+</code></pre>
+<blockquote>
+<p><strong>FUNFACT:</strong> You may have noticed that we used the same function name several times in this project, <code>someDatabaseModelFunction</code>. This is <strong>NOT</strong> required. This can make it easier to ensure that in each layer the correct function is being called, but this can change to make it more unique to the overall project.</p>
+</blockquote>
+<hr>
+<p><a name="conclude"></a></p>
+<h2>Conclusion</h2>
+<p>This has been an example on how to add a level of abstraction to a client-server website for database access, but this isn't the only way to do this. Several people have worked on various methodologies to add a form of middleware (<a href="https://gtsopour.medium.com/nodejs-express-middleware-abstraction-2d25926516e4">example by Medium</a>) or add other forms of abstraction. Feel free to experiement with ReactJS and ExpressJS to make the client and server that work best for your project.</p>
+<p>The main thing to worry about after the development of your system, is to make is maintainable and teachable enough to allow for future developers and webmasters to take your place!</p>
+<p>Happy Coding!</p>
+<script>hljs.highlightAll();</script>
+            </div>
+        </div>
+        <footer class="footer p-10 bg-neutral text-neutral-content">
+    <nav>
+        <h6 class="footer-title text-accent">&copy; 2024. George D. Crochiere</h6> 
+    </nav>
+</footer>
+    </div>
+
+</body>
+</html>

@@ -1,6 +1,7 @@
 :root {
     --base: #25241f;
-    --code-block: #424242;
+    --quote-block: #424242;
+    --code-block: #282936;
     --primary: #0094a3;
     --secondary: #008278;
     --neutral: #211700;
@@ -72,7 +73,7 @@ div.blog-post a:visited {
 }
 
 blockquote {
-    background-color: var(--code-block);
+    background-color: var(--quote-block);
     margin: 1rem;
     padding: 1rem;
     border-radius: 0rem 1rem 1rem 0rem;
